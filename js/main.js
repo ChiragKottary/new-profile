@@ -390,6 +390,386 @@ document.addEventListener("DOMContentLoaded", () => {
   requestAnimationFrame(() => {
     document.body.classList.remove("no-transition");
   });
+
+  codeContent = document.querySelector('.code-content code');
+  monitorContainer = document.querySelector('.monitor-container');
+  isHovered = false;
+  currentQuery = 0;
+
+  const queries = [
+    {
+      prompt: 'chirag@portfolio:~$ ',
+      command: 'SELECT * FROM developer_profile;',
+      result: `
+-- Basic Information
++---------------+--------------------------------+
+| name          | Chirag Kottary                 |
+| role          | Full Stack RPG Developer       |
+| experience    | 1+ years                       |
+| projects      | 10+                            |
+| clients       | 2+                             |
++---------------+--------------------------------+`
+    },
+    {
+      prompt: 'chirag@portfolio:~$ ',
+      command: 'SELECT * FROM skills;',
+      result: `
+-- Technical Skills
++----------------+--------------------------------+
+| category       | technologies                   |
++----------------+--------------------------------+
+| Languages      | Java, JavaScript, TypeScript,  |
+|                | HTML/CSS                       |
+| Frameworks/DB  | React, Node.js, Express, Hono, |
+|                | Recoil, PostgreSQL, MySQL,     |
+|                | Prisma ORM, MongoDB, Tailwind, |
+|                | Material-UI                    |
+| Dev Tools      | Git, GitHub, VS Code,         |
+|                | PyCharm, IntelliJ, Eclipse    |
++----------------+--------------------------------+`
+    }
+  ];
+
+  let isTyping = false;
+
+  // Typing animation function
+  async function typeText(text, element, className = '') {
+    if (isHovered) return;
+    
+    for (let char of text) {
+      if (isHovered) break;
+      
+      if (className) {
+        const span = document.createElement('span');
+        span.className = className;
+        span.textContent = char;
+        element.appendChild(span);
+      } else {
+        element.insertAdjacentText('beforeend', char);
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, 50));
+    }
+  }
+
+  // Display query result
+  async function showQueryResult(result) {
+    if (isHovered) return;
+    
+    await new Promise(resolve => setTimeout(resolve, 500));
+    if (!isHovered) {
+      const resultElement = document.createElement('pre');
+      resultElement.className = 'result';
+      resultElement.textContent = result;
+      codeContent.appendChild(resultElement);
+      
+      // Scroll to bottom
+      codeContent.parentElement.scrollTop = codeContent.parentElement.scrollHeight;
+    }
+  }
+
+  // Main animation loop
+  async function animateQueries() {
+    while (true) {
+      if (isHovered) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        continue;
+      }
+
+      const query = queries[currentQuery];
+      
+      // Create new line with prompt
+      const line = document.createElement('div');
+      line.className = 'command-line';
+      codeContent.appendChild(line);
+      
+      // Type prompt
+      await typeText(query.prompt, line, 'prompt');
+      
+      // Type command
+      await typeText(query.command, line, 'command');
+      
+      // Show result
+      await showQueryResult(query.result);
+      
+      // Move to next query
+      currentQuery = (currentQuery + 1) % queries.length;
+      
+      // Pause between queries
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Clear terminal if we're back to the first query
+      if (currentQuery === 0 && !isHovered) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        codeContent.innerHTML = '';
+      }
+    }
+  }
+
+  // Add hover listeners
+  monitorContainer.addEventListener('mouseenter', () => {
+    isHovered = true;
+  });
+
+  monitorContainer.addEventListener('mouseleave', () => {
+    isHovered = false;
+  });
+
+  // Start animation
+  animateQueries();
+
+  // Add screen flicker effect
+  function addScreenFlicker() {
+    const monitor = document.querySelector('.monitor-screen');
+    setInterval(() => {
+      if (!isHovered && Math.random() < 0.1) {
+        monitor.style.opacity = '0.8';
+        setTimeout(() => {
+          monitor.style.opacity = '1';
+        }, 50);
+      }
+    }, 5000);
+  }
+
+  addScreenFlicker();
+
+  let currentInput = '';
+  let commandHistory = [];
+  let historyIndex = -1;
+
+  const availableCommands = {
+    'help': () => `
+Available commands:
++----------------+--------------------------------+
+| Command        | Description                    |
++----------------+--------------------------------+
+| help          | Show available commands         |
+| about         | Display developer profile       |
+| skills        | List technical skills          |
+| experience    | Show work experience           |
+| projects      | View project portfolio         |
+| contact       | Get contact information        |
+| github        | Show GitHub statistics         |
+| clear         | Clear terminal screen          |
++----------------+--------------------------------+`,
+    
+    'about': async () => {
+      const profile = `
+-- Developer Profile
++---------------+--------------------------------+
+| Name          | Chirag Kottary                 |
+| Role          | Full Stack RPG Developer       |
+| Experience    | 1+ years                       |
+| Projects      | 10+                            |
+| Clients       | 2+                             |
++---------------+--------------------------------+
+
+Type 'skills' to view technical expertise
+Type 'projects' to see my work`;
+      
+      await typeText(profile);
+      return '';
+    },
+    
+    'skills': async () => {
+      const skills = `
+-- Technical Skills
++----------------+--------------------------------+
+| Category       | Technologies                   |
++----------------+--------------------------------+
+| Languages      | Java, JavaScript, TypeScript,  |
+|                | HTML/CSS                       |
+| Frameworks/DB  | React, Node.js, Express, Hono, |
+|                | Recoil, PostgreSQL, MySQL,     |
+|                | Prisma ORM, MongoDB, Tailwind, |
+|                | Material-UI                    |
+| Dev Tools      | Git, GitHub, VS Code,         |
+|                | PyCharm, IntelliJ, Eclipse    |
++----------------+--------------------------------+
+
+Type 'experience' to see where I've applied these skills`;
+      
+      await typeText(skills);
+      return '';
+    },
+    
+    'experience': async () => {
+      const exp = `
+-- Work Experience
++----------------+--------------------------------+
+| Company        | Hirademy Technologies         |
+| Role          | Software Development Engineer   |
+| Period        | Mar. 2024 – Sep. 2024          |
+| Location      | Bangalore - Remote             |
++----------------+--------------------------------+
+• Migrated frontend to React
+• Developed OAuth systems
+• Led team of 3 interns
+
++----------------+--------------------------------+
+| Company        | Effinity                      |
+| Role          | Junior Developer Intern        |
+| Period        | Nov. 2022 - May. 2023         |
+| Location      | Mangalore - OnSite            |
++----------------+--------------------------------+
+• Improved software stability
+• Built ReactJS components
+• Created WhatsApp chatbot`;
+      
+      await typeText(exp);
+      return '';
+    },
+
+    'projects': async () => {
+      const projects = `
+-- Recent Projects
++----------------+--------------------------------+
+| Project        | Description                    |
++----------------+--------------------------------+
+| Madhyamam      | • Content publishing platform  |
+|                | • Built with React & Node.js   |
+|                | • Improved user engagement     |
++----------------+--------------------------------+
+| Payment App    | • Secure transaction system    |
+|                | • Integrated multiple gateways |
+|                | • Enhanced user security       |
++----------------+--------------------------------+
+| RTO System     | • Vehicle registration manager |
+|                | • Streamlined processes        |
+|                | • Reduced processing time      |
++----------------+--------------------------------+`;
+      
+      await typeText(projects);
+      return '';
+    },
+
+    'contact': async () => {
+      const contact = `
+-- Contact Information
++----------------+--------------------------------+
+| Method         | Detail                         |
++----------------+--------------------------------+
+| Email         | chiragkottary@gmail.com        |
+| LinkedIn      | linkedin.com/in/chiragkottary  |
+| GitHub        | github.com/ChiragKottary       |
+| Location      | Mangalore, Karnataka           |
++----------------+--------------------------------+
+
+Feel free to reach out!`;
+      
+      await typeText(contact);
+      return '';
+    },
+
+    'clear': () => {
+      codeContent.innerHTML = '';
+      return '';
+    },
+
+    'github': async () => {
+      const github = `
+Fetching GitHub statistics...
+
+• Username: ChiragKottary
+• Repositories: 10+
+• Main languages: JavaScript, Java, TypeScript
+• Active contributor
+
+Visit: github.com/ChiragKottary for more details`;
+      
+      await typeText(github);
+      return '';
+    }
+  };
+
+  async function typeText(text, speed = 10) {
+    if (isTyping) return text;
+    isTyping = true;
+    
+    const output = document.createElement('pre');
+    output.className = 'result';
+    codeContent.appendChild(output);
+    
+    const lines = text.split('\n');
+    for (let line of lines) {
+      output.textContent += line + '\n';
+      await new Promise(resolve => setTimeout(resolve, speed));
+      scrollToBottom();
+    }
+    
+    isTyping = false;
+    return '';
+  }
+
+  // Create new command line
+  function createCommandLine() {
+    const line = document.createElement('div');
+    line.className = 'command-line';
+    const prompt = document.createElement('span');
+    prompt.className = 'prompt';
+    prompt.textContent = 'chirag@portfolio:~$ ';
+    line.appendChild(prompt);
+    const input = document.createElement('span');
+    input.className = 'current-input';
+    line.appendChild(input);
+    codeContent.appendChild(line);
+    return input;
+  }
+
+  // Handle command execution
+  async function executeCommand(cmd) {
+    const command = cmd.trim().toLowerCase();
+    if (command) {
+      commandHistory.push(command);
+      historyIndex = commandHistory.length;
+      
+      if (availableCommands[command]) {
+        const result = await availableCommands[command]();
+        if (result) {
+          const output = document.createElement('pre');
+          output.className = 'result';
+          output.textContent = result;
+          codeContent.appendChild(output);
+        }
+      } else {
+        const error = document.createElement('div');
+        error.className = 'error';
+        error.textContent = `Command not found: ${command}. Type 'help' for available commands.`;
+        codeContent.appendChild(error);
+      }
+    }
+    currentInput = '';
+    createCommandLine();
+    scrollToBottom();
+  }
+
+  function scrollToBottom() {
+    const scrollContainer = codeContent.parentElement;
+    scrollContainer.scrollTop = scrollContainer.scrollHeight;
+  }
+
+  function initTerminal() {
+    codeContent.innerHTML = '';
+    typeText(`
+Welcome to Chirag's Portfolio Terminal
+Type 'help' for available commands.
+`);
+    createCommandLine();
+  }
+
+  // Add visual focus indicator
+  monitorContainer.addEventListener('mouseenter', () => {
+    monitorContainer.classList.add('focused');
+  });
+
+  monitorContainer.addEventListener('mouseleave', () => {
+    if (document.activeElement !== hiddenInput) {
+      monitorContainer.classList.remove('focused');
+    }
+  });
+
+  // Initialize
+  initTerminal();
 });
 
 // Add smooth scrolling with offset for fixed header
@@ -427,3 +807,83 @@ function initGitHubStats() {
     };
   });
 }
+
+// Initialize EmailJS
+(function() {
+  emailjs.init("uII5gZ5SVHh2I7as1");
+})();
+
+// Alert function
+function showAlert(message, type) {
+  const alertContainer = document.querySelector('.alert-container');
+  const alert = document.createElement('div');
+  alert.className = `alert ${type}`;
+  
+  const icon = type === 'success' 
+    ? '<i class="fas fa-check-circle"></i>' 
+    : '<i class="fas fa-exclamation-circle"></i>';
+  
+  alert.innerHTML = `${icon}${message}`;
+  alertContainer.appendChild(alert);
+
+  setTimeout(() => {
+    alert.classList.add('fade-out');
+    setTimeout(() => {
+      alert.remove();
+    }, 500);
+  }, 3000);
+}
+
+// Contact form handler
+window.sendMail = async function(event) {
+  event.preventDefault();
+
+  const submitBtn = document.getElementById('submit-btn');
+  const buttonText = submitBtn.querySelector('.button-text');
+  const form = document.getElementById('contact-form');
+
+  submitBtn.classList.add('loading');
+  buttonText.textContent = 'Sending...';
+  submitBtn.disabled = true;
+
+  const templateParams = {
+    from_name: form.name.value,
+    from_email: form.email.value,
+    message: form.message.value,
+  };
+
+  try {
+    await emailjs.send(
+      'service_x8hfw5q',
+      'template_wx2aucg',
+      templateParams
+    );
+
+    submitBtn.classList.remove('loading');
+    submitBtn.classList.add('success');
+    buttonText.textContent = 'Message Sent!';
+    showAlert('Message sent successfully!', 'success');
+    form.reset();
+
+    setTimeout(() => {
+      submitBtn.classList.remove('success');
+      submitBtn.disabled = false;
+      buttonText.textContent = 'Send Message';
+    }, 3000);
+
+  } catch (error) {
+    console.error('Failed to send email:', error);
+    submitBtn.classList.remove('loading');
+    submitBtn.classList.add('error');
+    buttonText.textContent = 'Failed to Send';
+    showAlert('Failed to send message. Please try again.', 'error');
+
+    setTimeout(() => {
+      submitBtn.classList.remove('error');
+      submitBtn.disabled = false;
+      buttonText.textContent = 'Send Message';
+    }, 3000);
+  }
+
+  return false;
+};
