@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Developer Portfolio</title>
+    <link rel="stylesheet" href="/scss/main.css" />
+    <script type="module" src="/js/main.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button id="theme-toggle" aria-label="Toggle theme">
+          <i class="fas fa-sun sun-icon"></i>
+          <i class="fas fa-moon moon-icon"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <div class="text-content">
+            <h1>
+              Hello,<br />
+              This is <span class="highlight-name"> Chirag Kottary</span>, I'm a
+              <span class="highlight-role"
+                >Full Stack RPG<br />
+                Developer</span
+              >.
+            </h1>
+            <div class="social-links">
+              <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+              <a href="#" class="social-icon"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a href="#" class="social-icon"
+                ><i class="far fa-envelope"></i
+              ></a>
+              <a href="#" class="social-icon"><i class="fas fa-phone"></i></a>
+              <a href="#" class="social-icon"
+                ><i class="fas fa-map-marker-alt"></i
+              ></a>
+            </div>
+            <div class="cta-buttons">
+              <a href="#contact" class="btn btn-primary">CONTACT ME</a>
+              <a href="#" class="btn btn-secondary">GET RESUME</a>
+            </div>
+          </div>
+          <div class="monitor-container">
+            <div class="monitor">
+              <div class="monitor-frame">
+                <div class="monitor-screen">
+                  <div class="screen-content">
+                    <pre class="code-content" style="tab-size: 3;">
+<code><span class="line-number">01</span> <span class="keyword">SELECT</span> developer_info.<span class="property">*</span>
+<span class="line-number">02</span> <span class="keyword">FROM</span> developers
+<span class="line-number">03</span> <span class="keyword">WHERE</span> name = <span class="string">'Chirag'</span>;
+<span class="line-number">04</span> 
+<span class="line-number">05</span> <span class="comment">-- Developer Profile Result</span>
+<span class="line-number">06</span> +---------------+--------------------------------+
+<span class="line-number">07</span> | <span class="property">name</span>          | Chirag                           |
+<span class="line-number">08</span> | <span class="property">role</span>          | Full Stack RPG Developer        |
+<span class="line-number">09</span> | <span class="property">experience</span>    | 1 years                         |
+<span class="line-number">10</span> | <span class="property">projects</span>      | 10                              |
+<span class="line-number">11</span> | <span class="property">clients</span>       | 2                              |
+<span class="line-number">12</span> +---------------+--------------------------------+
+<span class="line-number">13</span> 
+<span class="line-number">14</span> <span class="keyword">SELECT</span> tech_stack
+<span class="line-number">15</span> <span class="keyword">FROM</span> developer_skills
+<span class="line-number">16</span> <span class="keyword">WHERE</span> dev_id = (<span class="keyword">SELECT</span> id <span class="keyword">FROM</span> developers <span class="keyword">WHERE</span> name = <span class="string">'Chirag'</span>);
+<span class="line-number">17</span> 
+<span class="line-number">18</span> <span class="comment">-- Tech Stack Result</span>
+<span class="line-number">19</span> +---------------+--------------------------------+
+<span class="line-number">20</span> | <span class="property">technology</span>    | <span class="property">proficiency</span>                    |
+<span class="line-number">21</span> +---------------+--------------------------------+
+<span class="line-number">22</span> | Node.js       | Advanced                        |
+<span class="line-number">23</span> | TypeScript    | Expert                          |
+<span class="line-number">24</span> | GraphQL       | Advanced                        |
+<span class="line-number">25</span> | Kubernetes    | Intermediate                    |
+<span class="line-number">26</span> | Terraform     | Advanced                        |
+<span class="line-number">27</span> +---------------+--------------------------------+</code>
+                  </div>
+                </div>
+                <div class="monitor-base"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <div class="bio-intro">
+              <h3>Who am I?</h3>
+              <p>
+                Hello! I'm Chirag Kottary, a passionate Full Stack RPG Developer
+                with a deep love for creating innovative solutions. With over 5
+                years of experience in the software industry, I specialize in
+                building robust and scalable applications that make a
+                difference.
+              </p>
+            </div>
+
+            <div class="bio-details">
+              <div class="bio-section">
+                <h4><i class="fas fa-code"></i> Technical Expertise</h4>
+                <p>
+                  I work with modern technologies including Node.js, TypeScript,
+                  GraphQL, and cloud platforms like AWS and Kubernetes. My
+                  approach combines technical excellence with business
+                  understanding to deliver optimal solutions.
+                </p>
+              </div>
+
+              <div class="bio-section">
+                <h4><i class="fas fa-lightbulb"></i> Problem Solving</h4>
+                <p>
+                  I thrive on tackling complex challenges and turning them into
+                  elegant solutions. My experience spans from optimizing
+                  database performance to architecting microservices
+                  infrastructures.
+                </p>
+              </div>
+
+              <div class="bio-section">
+                <h4><i class="fas fa-users"></i> Team Collaboration</h4>
+                <p>
+                  I believe in the power of teamwork and knowledge sharing. I
+                  actively contribute to team growth through mentoring and
+                  fostering a culture of continuous learning.
+                </p>
+              </div>
+            </div>
+
+            <div class="key-highlights">
+              <div class="highlight-item">
+                <span class="highlight-number">5+</span>
+                <span class="highlight-label">Years Experience</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-number">50+</span>
+                <span class="highlight-label">Projects Completed</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-number">20+</span>
+                <span class="highlight-label">Happy Clients</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-image">
+            <div class="image-container">
+              <div class="image-placeholder">
+                <!-- Replace with your actual image -->
+                <img src="path/to/your-photo.jpg" alt="Chirag Kottary" />
+              </div>
+              <div class="tech-stack">
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">TypeScript</span>
+                <span class="tech-badge">GraphQL</span>
+                <span class="tech-badge">Kubernetes</span>
+                <span class="tech-badge">AWS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="projects">
+        <h2>My Projects</h2>
+        <div class="project-grid">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="path/to/nexfolio-image.jpg" alt="NexFolio Project" />
+              <div class="project-links">
+                <a href="#" class="project-link"
+                  ><i class="fas fa-external-link-alt"></i> Demo</a
+                >
+                <a href="#" class="project-link"
+                  ><i class="fas fa-code"></i> Code</a
+                >
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>NexFolio</h3>
+              <p>A portfolio builder application</p>
+              <div class="tech-stack">
+                <span class="tech-tag">nextjs</span>
+                <span class="tech-tag">prisma</span>
+                <span class="tech-tag">aws</span>
+                <span class="tech-tag">shadcn ui</span>
+                <span class="tech-tag">tailwind css</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <img
+                src="path/to/flavourfetch-image.jpg"
+                alt="FlavourFetch Project"
+              />
+              <div class="project-links">
+                <a href="#" class="project-link"
+                  ><i class="fas fa-external-link-alt"></i> Demo</a
+                >
+                <a href="#" class="project-link"
+                  ><i class="fas fa-code"></i> Code</a
+                >
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>FlavourFetch</h3>
+              <p>A food ordering application</p>
+              <div class="tech-stack">
+                <span class="tech-tag">react</span>
+                <span class="tech-tag">nodejs</span>
+                <span class="tech-tag">express</span>
+                <span class="tech-tag">typescript</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <img src="path/to/chatboxd-image.jpg" alt="ChatBoxd Project" />
+              <div class="project-links">
+                <a href="#" class="project-link"
+                  ><i class="fas fa-external-link-alt"></i> Demo</a
+                >
+                <a href="#" class="project-link"
+                  ><i class="fas fa-code"></i> Code</a
+                >
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>ChatBoxd</h3>
+              <p>A chatting application</p>
+              <div class="tech-stack">
+                <span class="tech-tag">react</span>
+                <span class="tech-tag">nextjs</span>
+                <span class="tech-tag">redis</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="experience">
+        <h2>Work Experience</h2>
+        <div class="experience-container">
+          <div class="experience-card">
+            <div class="experience-header">
+              <h3>Full Stack Developer</h3>
+              <div class="experience-meta">
+                <span class="company"
+                  ><i class="fas fa-building"></i> Google</span
+                >
+                <span class="location"
+                  ><i class="fas fa-map-marker-alt"></i> Hyderabad</span
+                >
+                <span class="duration"
+                  ><i class="far fa-calendar-alt"></i> Feb 2024 - Jan 2025</span
+                >
+              </div>
+            </div>
+            <p class="experience-description">I build very good applications</p>
+            <div class="tech-stack">
+              <span class="tech-tag">react</span>
+              <span class="tech-tag">golang</span>
+              <span class="tech-tag">lua</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="skills">
+        <h2>Skills</h2>
+        <div class="floating-skills">
+          <!-- Skills will be dynamically added via JavaScript -->
+        </div>
+      </section>
+
+      <section id="certifications" class="certifications">
+        <h2>Certifications</h2>
+        <div class="slider-container">
+          <button class="slider-arrow prev" aria-label="Previous slide">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="certification-slider">
+            <div class="certification-card">
+              <div class="certification-logo">
+                <img src="path/to/aws-logo.png" alt="AWS Certification" />
+              </div>
+              <h3>AWS Solutions Architect</h3>
+              <p>Amazon Web Services</p>
+              <span class="date">2023</span>
+              <a href="#" class="verify-btn">Verify Certificate</a>
+            </div>
+            <div class="certification-card">
+              <div class="certification-logo">
+                <img src="path/to/aws-logo.png" alt="AWS Certification" />
+              </div>
+              <h3>AWS Solutions Architect</h3>
+              <p>Amazon Web Services</p>
+              <span class="date">2023</span>
+              <a href="#" class="verify-btn">Verify Certificate</a>
+            </div>
+            <div class="certification-card">
+              <div class="certification-logo">
+                <img src="path/to/aws-logo.png" alt="AWS Certification" />
+              </div>
+              <h3>AWS Solutions Architect</h3>
+              <p>Amazon Web Services</p>
+              <span class="date">2023</span>
+              <a href="#" class="verify-btn">Verify Certificate</a>
+            </div>
+            <div class="certification-card">
+              <div class="certification-logo">
+                <img src="path/to/azure-logo.png" alt="Azure Certification" />
+              </div>
+              <h3>Azure Developer Associate</h3>
+              <p>Microsoft Azure</p>
+              <span class="date">2023</span>
+              <a href="#" class="verify-btn">Verify Certificate</a>
+            </div>
+            <div class="certification-card">
+              <div class="certification-logo">
+                <img src="path/to/gcp-logo.png" alt="GCP Certification" />
+              </div>
+              <h3>Google Cloud Engineer</h3>
+              <p>Google Cloud Platform</p>
+              <span class="date">2022</span>
+              <a href="#" class="verify-btn">Verify Certificate</a>
+            </div>
+          </div>
+          <button class="slider-arrow next" aria-label="Next slide">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+      
+      <section id="github-stats" class="github-stats">
+        <h2>GitHub Contributions</h2>
+        <div class="github-container">
+          <div class="github-profile">
+            <img
+              src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=ChiragKottary&show_icons=true&theme=dark&hide_border=true&count_private=true&include_all_commits=true"
+              alt="GitHub Stats"
+              class="github-stats-card"
+              onerror="this.onerror=null; this.src='assets/images/fallback-stats.png';"
+            />
+            <img
+              src="https://streak-stats.demolab.com/?user=ChiragKottary&theme=dark&hide_border=true"
+              alt="GitHub Streak"
+              class="github-streak-card"
+              onerror="this.onerror=null; this.src='assets/images/fallback-streak.png';"
+            />
+          </div>
+          <div class="contribution-graph">
+            <img
+              src="https://github-readme-activity-graph.vercel.app/graph?username=ChiragKottary&theme=github-dark&hide_border=true"
+              alt="GitHub Contributions"
+              class="github-graph"
+              onerror="this.onerror=null; this.src='assets/images/fallback-graph.png';"
+            />
+          </div>
+          <div class="github-languages">
+            <img
+              src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/top-langs/?username=ChiragKottary&layout=compact&theme=dark&hide_border=true&langs_count=8"
+              alt="Top Languages"
+              class="github-languages-card"
+              onerror="this.onerror=null; this.src='assets/images/fallback-languages.png';"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <form id="contact-form">
+          <div class="form-group">
+            <input type="text" id="name" required placeholder="Your Name" />
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" required placeholder="Your Email" />
+          </div>
+          <div class="form-group">
+            <textarea
+              id="message"
+              required
+              placeholder="Your Message"
+            ></textarea>
+          </div>
+          <button type="submit">Send Message</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About Me</h3>
+          <p>
+            Full Stack Developer passionate about creating exceptional digital
+            experiences with clean, efficient code.
+          </p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <div class="footer-links">
+            <a href="mailto:hello@example.com"
+              ><i class="far fa-envelope"></i> hello@example.com</a
+            >
+            <a href="tel:+1234567890"
+              ><i class="fas fa-phone"></i> +1 (234) 567-890</a
+            >
+            <a href="#"
+              ><i class="fas fa-map-marker-alt"></i> San Francisco, CA</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Neo James. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

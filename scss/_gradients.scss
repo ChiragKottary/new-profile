@@ -1,0 +1,108 @@
+// Gradient color mappings
+$gradient-colors: (
+  1: (
+    start: #ff69b4,
+    end: #00ffd5,
+  ),
+  2: (
+    start: #00ffd5,
+    end: #4a90e2,
+  ),
+  3: (
+    start: #4a90e2,
+    end: #9d50bb,
+  ),
+  4: (
+    start: #9d50bb,
+    end: #6be585,
+  ),
+  5: (
+    start: #6be585,
+    end: #ff9a9e,
+  ),
+);
+
+// Gradient mixins
+@mixin section-gradient($start, $end) {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, $start, $end);
+    z-index: 1;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(var(--bg-primary-rgb), 0.1) 20%,
+      rgba(var(--bg-primary-rgb), 0.8) 80%
+    );
+    pointer-events: none;
+  }
+}
+
+// Gradient animations
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes slideGradient {
+  to {
+    transform: translateY(0);
+  }
+}
+
+// Section gradient styles
+section {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    transform: translateY(100%);
+    animation: slideGradient 0.5s forwards;
+  }
+}
+
+// Responsive gradient adjustments
+@media (max-width: 768px) {
+  section {
+    &::after {
+      height: 4px;
+    }
+    &::before {
+      height: 100px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    &::after {
+      height: 3px;
+    }
+    &::before {
+      height: 70px;
+    }
+  }
+}

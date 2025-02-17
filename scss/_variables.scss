@@ -1,0 +1,47 @@
+// Breakpoints
+$breakpoints: (
+  xs: 480px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px,
+);
+
+// Theme Variables
+$gradient-colors: (
+  1: (
+    start: #ff69b4,
+    end: #00ffd5,
+  ),
+  2: (
+    start: #00ffd5,
+    end: #4a90e2,
+  ),
+  3: (
+    start: #4a90e2,
+    end: #9d50bb,
+  ),
+  4: (
+    start: #9d50bb,
+    end: #6be585,
+  ),
+  5: (
+    start: #6be585,
+    end: #ff9a9e,
+  ),
+);
+
+// Responsive mixins
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
+
+// Menu variables
+$mobile-menu-height: 60px;
+$mobile-menu-bg: var(--bg-primary);
+$mobile-menu-active-bg: var(--bg-secondary);
+$mobile-menu-border: var(--accent-secondary);
+$mobile-menu-breakpoint: map-get($breakpoints, sm);
